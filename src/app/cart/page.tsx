@@ -46,7 +46,9 @@ export default function CartPage() {
         const ids = storedCart.map((item) => item.productId).join(",");
         const response = await fetch(`/api/products?ids=${encodeURIComponent(ids)}`);
         const products = await response.json();
-        const productMap = new Map(products.map((product: any) => [product.id, product]));
+        const productMap = new Map<string, any>(
+          products.map((product: any) => [product.id, product]),
+        );
 
         hydratedCart = storedCart.map((item) => {
           const product = productMap.get(item.productId);
